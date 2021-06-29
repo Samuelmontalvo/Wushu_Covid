@@ -127,3 +127,12 @@ ggsave("RSImod.png")
 
 ggarrange(p_a, p_b, p_c, p_d, widths = c(2,2))
 ggsave("all_plots.png")
+
+
+# Reliability
+Reliability <- read_excel("Wushu_Covid_open.xlsx", 
+                    sheet = "Reliability")
+View(Reliability)
+attach(Reliability)
+Reliability <- subset(Reliability, select = c("JH_1","JH_2","JH_3"))
+ICC(Reliability)
