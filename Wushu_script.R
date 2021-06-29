@@ -133,6 +133,21 @@ ggsave("all_plots.png")
 Reliability <- read_excel("Wushu_Covid_open.xlsx", 
                     sheet = "Reliability")
 View(Reliability)
-attach(Reliability)
-Reliability <- subset(Reliability, select = c("JH_1","JH_2","JH_3"))
-ICC(Reliability)
+attach(Reliability).
+Reliability$Period <- as.factor(Reliability$Period)
+#ICC PRE
+ICC_pre <- Reliability %>% filter(Period == "Pre") %>%
+  subset(select = c("JH_1","JH_2","JH_3"))
+ICC(ICC_pre)
+#ICC post
+ICC_post <- Reliability %>% filter(Period == "Post") %>%
+  subset(select = c("JH_1","JH_2","JH_3")) 
+ICC(ICC_post)
+#ICC post+2
+ICC_post2 <- Reliability %>% filter(Period == "Post+2") %>%
+  subset(select = c("JH_1","JH_2","JH_3")) 
+ICC(ICC_post2)
+#ICC post+2
+ICC_post4 <- Reliability %>% filter(Period == "Post+4") %>%
+  subset(select = c("JH_1","JH_2","JH_3")) 
+ICC(ICC_post4)
