@@ -579,60 +579,60 @@ ggsave("RMR_BFvsPV.png")
 #Repeated measures correlation for FFM and Peak Velocity
 
 repeated <- rmcorr(participant = ID,
-                   measure1 = FM, measure2 = peak_velocity,
+                   measure1 = FM, measure2 = RSIm,
                    dataset = df,
                    CI.level = 0.95, CIs = c("bootstrap"),
                    nreps = 1000, bstrap.out = F)
 repeated
 
 ##regression line for all RMC
-null.vol <- lmer(peak_velocity ~ FFM + (1| ID), data = df, REML = FALSE)
+null.vol <- lmer(peak_velocity ~ FM + (1| ID), data = df, REML = FALSE)
 
 
-Wu <- ggplot(df, ggplot2::aes(x = FFM, y = peak_velocity, group = factor(ID),
+Wu <- ggplot(df, ggplot2::aes(x = FM, y = peak_velocity, group = factor(ID),
                               color = factor(ID))) +
   geom_point(ggplot2::aes(colour = factor(ID))) +
   geom_line(ggplot2::aes(y = repeated$model$fitted.values), linetype = 1) +
-  xlab("Fat-Free Mass (kg)") +
+  xlab("Fat Mass (kg)") +
   ylab("Peak Velocity (m/s)") +
   theme_classic() +
-  annotate("text", label = "RMC = 0.471 [0.276,0.675], p=0.012", x = 45, y = 3.5) +
+  annotate("text", label = "RMC = 0.471 [0.276,0.675], p=0.012", x = 8, y = 3.5) +
   geom_abline(intercept = fixef(null.vol)[1], slope = fixef(null.vol)[2],
               colour = "black", size = 1, linetype = 2)
 Wu
 
 
 pre_period <- subset(df, Period=="Pre")
-pre <- ggscatter(pre_period, x = "FFM", y = "peak_velocity",
+pre <- ggscatter(pre_period, x = "FM", y = "peak_velocity",
                  add = "reg.line", fullrange = TRUE,                                # Add regression line
                  conf.int = TRUE,                                  # Add confidence interval
                  add.params = list(color = "blue",
                                    fill = "lightgray"))+ labs(y = "Peak Velocity (m/s)",
-                                                              x = "Fat-Free Mass (kg)") +
+                                                              x = "Fat Mass (kg)") +
   stat_cor(method = "pearson",aes(label = paste(..r.label..,..p.label.., sep = "~`,`~")),
-           label.x = 40, label.y = 3.5,p.accuracy = 0.001, r.accuracy = 0.01)  # Add correlation coefficient
+           label.x = 7, label.y = 3.5,p.accuracy = 0.001, r.accuracy = 0.01)  # Add correlation coefficient
 pre
 
 post_period <- subset(df, Period=="Post")
-post <- ggscatter(post_period, x = "FFM", y = "peak_velocity",
+post <- ggscatter(post_period, x = "FM", y = "peak_velocity",
                   add = "reg.line", fullrange = TRUE,                                # Add regression line
                   conf.int = TRUE,                                  # Add confidence interval
                   add.params = list(color = "blue",
                                     fill = "lightgray"))+ labs(y = "Peak Velocity (m/s)",
-                                                               x = "Fat-Free Mass (kg)") +
+                                                               x = "Fat Mass (kg)") +
   stat_cor(method = "pearson",aes(label = paste(..r.label..,..p.label.., sep = "~`,`~")),
-           label.x = 38, label.y = 3.5, p.accuracy = 0.001, r.accuracy = 0.01)  # Add correlation coefficient
+           label.x = 7, label.y = 3.5, p.accuracy = 0.001, r.accuracy = 0.01)  # Add correlation coefficient
 post
 
 post4_period <- subset(df, Period=="Post+4")
-post4 <- ggscatter(post4_period, x = "FFM", y = "peak_velocity",
+post4 <- ggscatter(post4_period, x = "FM", y = "peak_velocity",
                    add = "reg.line", fullrange = TRUE,                                # Add regression line
                    conf.int = TRUE,                                  # Add confidence interval
                    add.params = list(color = "blue",
                                      fill = "lightgray"))+ labs(y = "Peak Velocity (m/s)",
-                                                                x = "Fat-Free Mass (kg)") +
+                                                                x = "Fat Mass (kg)") +
   stat_cor(method = "pearson",aes(label = paste(..r.label..,..p.label.., sep = "~`,`~")),
-           label.x = 38, label.y = 3.5, p.accuracy = 0.001, r.accuracy = 0.01)    # Add correlation coefficient
+           label.x = 7, label.y = 3.5, p.accuracy = 0.001, r.accuracy = 0.01)    # Add correlation coefficient
 post4
 
 
@@ -641,4 +641,4 @@ ggarrange(Wu,                                                 # First row with s
                     label.y = 1.1), # Second row with box and dot plots
           nrow = 2,
           labels = "A")
-ggsave("RMR_FFMvsPV.png")
+ggsave("RMR_FMvsPV.png")
