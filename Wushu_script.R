@@ -197,7 +197,7 @@ Anthro%>% describeBy(Period)
 Anthro %>% group_by(Period) %>% shapiro_test(FM)
 # Repeated Measures Anova (within subjects)
 res.aov <- anova_test(data = Anthro, dv = FM, 
-                      wid = ID, within = Period)
+                      wid = ID...5, within = Period)
 get_anova_table(res.aov)
 
 #Post-hoc pairwise comparisons
@@ -228,7 +228,7 @@ ggsave("Fat-free-mass.png")
 Anthro %>% group_by(Period) %>% shapiro_test(FFM)
 # Repeated Measures Anova (within subjects)
 res.aov <- anova_test(data = Anthro, dv = FFM, 
-                      wid = ID, within = Period)
+                      wid = ID..5, within = Period)
 get_anova_table(res.aov)
 
 #Post-hoc pairwise comparisons
@@ -257,7 +257,7 @@ ggsave("Fat-Free-Mass.png")
 Anthro %>% group_by(Period) %>% shapiro_test(BF)
 # Repeated Measures Anova (within subjects)
 res.aov <- anova_test(data = Anthro, dv = BF, 
-                      wid = ID, within = Period)
+                      wid = ID...5, within = Period)
 get_anova_table(res.aov)
 
 #Post-hoc pairwise comparisons
