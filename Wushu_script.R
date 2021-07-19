@@ -47,6 +47,7 @@ Wushu  %>% cohens_d(JH ~ Period,
 #Plots
 library(ggplot2)
 library(ggpubr)
+
 # Add position for p values in boxplot
 pwc <- pwc %>% add_xy_position(x = "Period")
 # Boxplot of Vertical Jump Height
