@@ -1,3 +1,4 @@
+
 library(readxl)
 Wushu <- read_excel("Wushu_Covid_open.xlsx", 
                                sheet = "Jump_Data")
